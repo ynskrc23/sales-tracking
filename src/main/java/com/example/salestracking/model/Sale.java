@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 // code first
 @Entity // not needed but it's useful for reviewing
 @Setter
@@ -15,7 +17,7 @@ import lombok.Setter;
 @Table(name = "sales")
 public class Sale extends BaseEntity {
     private int quantity;
-    private double totalAmount;
+    private BigDecimal totalAmount;
     private String status;
     @ManyToOne
     @JoinColumn(name = "customer_id")

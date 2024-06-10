@@ -48,7 +48,8 @@ public class CustomerManager implements CustomerService {
     public UpdateCustomerResponse update(Long id, UpdateCustomerRequest request)
     {
         Optional<Customer> isCustomer = repository.findById(id);
-        if(isCustomer.isPresent()){
+        if(isCustomer.isPresent())
+        {
             Customer customer = mapper.map(request, Customer.class);
             customer.setId(Math.toIntExact(id));
             repository.save(customer);
@@ -60,7 +61,8 @@ public class CustomerManager implements CustomerService {
     @Override
     public String delete(Long id) {
         Optional<Customer> isCustomer = repository.findById(id);
-        if(isCustomer.isPresent()){
+        if(isCustomer.isPresent())
+        {
             repository.deleteById(id);
             return "Customer deleted successfully";
         }

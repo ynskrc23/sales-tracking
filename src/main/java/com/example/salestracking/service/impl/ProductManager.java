@@ -32,7 +32,7 @@ public class ProductManager implements ProductService {
     @Override
     public GetProductResponse getById(Long id)
     {
-        Product product = repository.findById(id).orElseThrow();
+        Product product = repository.findById(id).orElseThrow(null);
         return mapper.map(product, GetProductResponse.class);
     }
 
@@ -49,7 +49,8 @@ public class ProductManager implements ProductService {
     public UpdateProductResponse update(Long id, UpdateProductRequest request)
     {
         Optional<Product> isProduct = repository.findById(id);
-        if(isProduct.isPresent()){
+        if(isProduct.isPresent())
+        {
             Product product = mapper.map(request, Product.class);
             product.setId(Math.toIntExact(id));
             repository.save(product);
@@ -62,7 +63,8 @@ public class ProductManager implements ProductService {
     public String delete(Long id)
     {
         Optional<Product> isProduct = repository.findById(id);
-        if(isProduct.isPresent()){
+        if(isProduct.isPresent())
+        {
             repository.deleteById(id);
             return "Product deleted successfully";
         }

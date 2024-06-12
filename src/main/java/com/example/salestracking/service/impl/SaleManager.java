@@ -13,7 +13,6 @@ import com.example.salestracking.repository.CustomerRepository;
 import com.example.salestracking.repository.ProductRepository;
 import com.example.salestracking.repository.SaleRepository;
 import com.example.salestracking.service.SaleService;
-import com.sun.jdi.Type;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;

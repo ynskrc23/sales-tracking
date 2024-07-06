@@ -1,7 +1,7 @@
 Spring boot, PostgreSQL, Jpa, Hibernate
 ---
 
-# Projenin Swagger Dökümanı
+# Projenin Swagger Dökümanı Fotoğrafları
 
 <img src="https://github.com/ynskrc23/sales-tracking/blob/master/image/swagger.PNG">
 <img src="https://github.com/ynskrc23/sales-tracking/blob/master/image/swagger2.PNG">
@@ -9,7 +9,7 @@ Spring boot, PostgreSQL, Jpa, Hibernate
 <img src="https://github.com/ynskrc23/sales-tracking/blob/master/image/swagger4.PNG">
 <img src="https://github.com/ynskrc23/sales-tracking/blob/master/image/swagger5.PNG">
 
----
+--- 
 # Kullanılan Teknolojiler
 ---
 - `Java17+`

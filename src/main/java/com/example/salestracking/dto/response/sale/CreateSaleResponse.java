@@ -14,6 +14,7 @@ import lombok.Setter;
 public class CreateSaleResponse {
     private Long id;
     private int quantity;
+    private double productSalePrice;
     private double totalAmount;
     private String status;
     private GetAllCustomersResponse customer;

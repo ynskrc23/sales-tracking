@@ -12,6 +12,7 @@ import com.example.salestracking.model.Sale;
 import com.example.salestracking.repository.CustomerRepository;
 import com.example.salestracking.repository.ProductRepository;
 import com.example.salestracking.repository.SaleRepository;
+import com.example.salestracking.rules.sale.StockRules;
 import com.example.salestracking.service.SaleService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -29,6 +30,8 @@ public class SaleManager implements SaleService {
     private final CustomerRepository customerRepository;
     private final ProductRepository productRepository;
     private final ModelMapper mapper;
+    private final StockRules stockRules;
+
     @Override
     public List<GetAllSalesResponse> getAll()
     {
@@ -58,8 +61,12 @@ public class SaleManager implements SaleService {
         {
             sale.setProduct(isProduct.get());
         }
+
+        // Önce stok kurallarını kontrol edelim
+        stockRules.checkStock(sale);
         BigDecimal quantity = BigDecimal.valueOf(sale.getQuantity());
         sale.setTotalAmount(quantity.multiply(isProduct.get().getPrice()));
+        sale.setProductSalePrice(isProduct.get().getPrice());
         sale.setId(0);
         repository.save(sale);
         return mapper.map(sale, CreateSaleResponse.class);
@@ -82,8 +89,12 @@ public class SaleManager implements SaleService {
             {
                 sale.setProduct(isProduct.get());
             }
+
+            // Önce stok kurallarını kontrol edelim
+            stockRules.checkStock(sale);
             BigDecimal quantity = BigDecimal.valueOf(sale.getQuantity());
             sale.setTotalAmount(quantity.multiply(isProduct.get().getPrice()));
+            sale.setProductSalePrice(isProduct.get().getPrice());
             sale.setId(id);
             repository.save(sale);
             return mapper.map(sale, UpdateSaleResponse.class);

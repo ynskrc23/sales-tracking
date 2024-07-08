@@ -20,7 +20,9 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -113,4 +115,15 @@ public class SaleManager implements SaleService {
         }
         return "No such sale in the database";
     }
+
+    public List<GetAllSalesResponse> getSalesBySaleNumber(String saleNumber)
+    {
+        List<Sale> sales = repository.findBySaleNumber(saleNumber);
+        return sales.stream().map(sale -> mapper.map(sale, GetAllSalesResponse.class)).toList();
+    }
+    public List<Object[]> getSalesGroupedBySaleNumber()
+    {
+        return repository.countSalesBySaleNumber();
+    }
+
 }

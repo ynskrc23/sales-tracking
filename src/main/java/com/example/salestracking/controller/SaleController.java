@@ -6,6 +6,7 @@ import com.example.salestracking.dto.response.sale.CreateSaleResponse;
 import com.example.salestracking.dto.response.sale.GetAllSalesResponse;
 import com.example.salestracking.dto.response.sale.GetSaleResponse;
 import com.example.salestracking.dto.response.sale.UpdateSaleResponse;
+import com.example.salestracking.model.Sale;
 import com.example.salestracking.service.SaleService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -13,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @AllArgsConstructor
@@ -50,5 +52,17 @@ public class SaleController {
     public String delete(@PathVariable Integer id)
     {
         return service.delete(id);
+    }
+
+    @GetMapping("/number/{saleNumber}")
+    public List<GetAllSalesResponse> getSalesBySaleNumber(@PathVariable String saleNumber)
+    {
+        return service.getSalesBySaleNumber(saleNumber);
+    }
+
+    @GetMapping("/grouped-by-sale-number")
+    public List<Object[]> getSalesGroupedBySaleNumber()
+    {
+        return service.getSalesGroupedBySaleNumber();
     }
 }

@@ -19,6 +19,7 @@ public class Sale extends BaseEntity {
     private int quantity;
     private BigDecimal productSalePrice;
     private BigDecimal totalAmount;
+    private String saleNumber;
     private String status;
     @ManyToOne
     @JoinColumn(name = "customer_id")

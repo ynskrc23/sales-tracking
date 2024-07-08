@@ -16,6 +16,7 @@ public class UpdateSaleResponse {
     private int quantity;
     private double productSalePrice;
     private double totalAmount;
+    private String saleNumber;
     private String status;
     private GetAllCustomersResponse customer;
     private GetAllProductsResponse product;

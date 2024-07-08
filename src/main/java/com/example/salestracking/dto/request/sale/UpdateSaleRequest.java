@@ -20,6 +20,9 @@ public class UpdateSaleRequest {
     @NotNull(message = "Status is mandatory")
     private String status;
 
+    @NotNull(message = "Sale Number is not null")
+    private String saleNumber;
+
     @NotNull(message = "Customer is mandatory")
     private int customer_id;
 

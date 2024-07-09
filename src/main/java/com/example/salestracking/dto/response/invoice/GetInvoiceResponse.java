@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Setter
 public class GetInvoiceResponse {
     private Long id;
-    private double amount;
+    private double amountDue;
     private String status;
     private LocalDateTime invoiceDate;
     private GetAllSalesResponse sale;

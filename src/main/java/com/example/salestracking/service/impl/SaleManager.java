@@ -71,6 +71,10 @@ public class SaleManager implements SaleService {
         sale.setProductSalePrice(isProduct.get().getPrice());
         sale.setId(0);
         repository.save(sale);
+
+        // Stok azaltma kuralını uygula
+        stockRules.reduceStock(sale);
+
         return mapper.map(sale, CreateSaleResponse.class);
     }
 
@@ -99,6 +103,10 @@ public class SaleManager implements SaleService {
             sale.setProductSalePrice(isProduct.get().getPrice());
             sale.setId(id);
             repository.save(sale);
+
+            // Stok azaltma kuralını uygula
+            stockRules.reduceStock(sale);
+
             return mapper.map(sale, UpdateSaleResponse.class);
         }
         return null;

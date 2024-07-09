@@ -1,6 +1,5 @@
 package com.example.salestracking.dto.request.invoice;
 
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,9 +11,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UpdateInvoiceRequest {
-    @Min(1)
-    @NotNull(message = "Amount is mandatory")
-    private double amount;
+    @NotNull(message = "Amount Due is mandatory")
+    private double amountDue;
 
     @NotNull(message = "Status is mandatory")
     private String status;

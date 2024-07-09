@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @Setter
 public class GetAllInvoicesResponse {
     private Long id;
-    private double amount;
+    private double amountDue;
     private String status;
     @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
     private LocalDateTime invoiceDate;

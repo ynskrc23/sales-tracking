@@ -18,7 +18,7 @@ public class Invoice extends BaseEntity{
     @ManyToOne
     @JoinColumn(name = "sale_id")
     private Sale sale;
-    private double amount;
+    private double amountDue;
     private String status;
     private LocalDateTime invoiceDate = LocalDateTime.now();
 }

@@ -4,11 +4,11 @@ Spring boot, PostgreSQL, Jpa, Hibernate
 # Projenin Swagger Dökümanı Fotoğrafları
 
 
-![image](https://github.com/ynskrc23/sales-tracking/blob/master/image/swagger.png)
-![image](https://github.com/ynskrc23/sales-tracking/blob/master/image/swagger2.png)
-![image](https://github.com/ynskrc23/sales-tracking/blob/master/image/swagger3.png)
-![image](https://github.com/ynskrc23/sales-tracking/blob/master/image/swagger4.png)
-![image](https://github.com/ynskrc23/sales-tracking/blob/master/image/swagger5.png)
+![](https://github.com/ynskrc23/sales-tracking/blob/master/image/swager.PNG)
+![](https://github.com/ynskrc23/sales-tracking/blob/master/image/swagger2.PNG)
+![](https://github.com/ynskrc23/sales-tracking/blob/master/image/swagger3.PNG)
+![](https://github.com/ynskrc23/sales-tracking/blob/master/image/swagger4.PNG)
+![](https://github.com/ynskrc23/sales-tracking/blob/master/image/swagger5.PNG)
 
 --- 
 # Kullanılan Teknolojiler

@@ -3,12 +3,20 @@ Spring boot, PostgreSQL, Jpa, Hibernate
 
 # Projenin Swagger Dökümanı Fotoğrafları
 
+### Customer API
+![](https://github.com/ynskrc23/sales-tracking/blob/master/image/customer.PNG)
 
-![](https://github.com/ynskrc23/sales-tracking/blob/master/image/swager.PNG)
-![](https://github.com/ynskrc23/sales-tracking/blob/master/image/swager2.PNG)
-![](https://github.com/ynskrc23/sales-tracking/blob/master/image/swager3.PNG)
-![](https://github.com/ynskrc23/sales-tracking/blob/master/image/swager4.PNG)
-![](https://github.com/ynskrc23/sales-tracking/blob/master/image/swager5.PNG)
+### Inovice API
+![](https://github.com/ynskrc23/sales-tracking/blob/master/image/inovice.PNG)
+
+### Product API
+![](https://github.com/ynskrc23/sales-tracking/blob/master/image/product.PNG)
+
+### Sale API
+![](https://github.com/ynskrc23/sales-tracking/blob/master/image/sale.PNG)
+
+### Sales Representative
+![](https://github.com/ynskrc23/sales-tracking/blob/master/image/sales-rep.PNG)
 
 --- 
 # Kullanılan Teknolojiler

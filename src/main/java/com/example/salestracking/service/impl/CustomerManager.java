@@ -39,7 +39,7 @@ public class CustomerManager implements CustomerService {
     public CreateCustomerResponse add(CreateCustomerRequest request)
     {
         Customer customer = mapper.map(request, Customer.class);
-        customer.setId(0);
+        customer.setCustomerId(0L);
         repository.save(customer);
         return mapper.map(customer, CreateCustomerResponse.class);
     }
@@ -51,7 +51,7 @@ public class CustomerManager implements CustomerService {
         if(isCustomer.isPresent())
         {
             Customer customer = mapper.map(request, Customer.class);
-            customer.setId(Math.toIntExact(id));
+            customer.setCustomerId((long) Math.toIntExact(id));
             repository.save(customer);
             return mapper.map(customer, UpdateCustomerResponse.class);
         }

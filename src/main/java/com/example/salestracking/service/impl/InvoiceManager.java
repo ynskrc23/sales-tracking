@@ -35,7 +35,7 @@ public class InvoiceManager implements InvoiceService {
     @Override
     public GetInvoiceResponse getById(Integer id)
     {
-        Invoice invoice = repository.findById(id).orElseThrow(null);
+        Invoice invoice = repository.findById(Long.valueOf(id)).orElseThrow(null);
         return mapper.map(invoice, GetInvoiceResponse.class);
     }
 
@@ -43,12 +43,12 @@ public class InvoiceManager implements InvoiceService {
     public CreateInvoiceResponse add(CreateInvoiceRequest request)
     {
         Invoice invoice = mapper.map(request, Invoice.class);
-        Optional<Sale> isSale = saleRepository.findById((int) request.getSale_id());
+        Optional<Sale> isSale = saleRepository.findById((long) request.getSale_id());
         if(isSale.isPresent())
         {
             invoice.setSale(isSale.get());
         }
-        invoice.setId(0);
+        invoice.setInvoiceId(0L);
         repository.save(invoice);
         return mapper.map(invoice, CreateInvoiceResponse.class);
     }
@@ -57,12 +57,12 @@ public class InvoiceManager implements InvoiceService {
     public UpdateInvoiceResponse update(Integer id, UpdateInvoiceRequest request)
     {
         Invoice invoice = mapper.map(request, Invoice.class);
-        Optional<Sale> isSale = saleRepository.findById((int) request.getSale_id());
+        Optional<Sale> isSale = saleRepository.findById((long) request.getSale_id());
         if(isSale.isPresent())
         {
             invoice.setSale(isSale.get());
         }
-        invoice.setId(id);
+        invoice.setInvoiceId(Long.valueOf(id));
         repository.save(invoice);
         return mapper.map(invoice, UpdateInvoiceResponse.class);
     }
@@ -70,10 +70,10 @@ public class InvoiceManager implements InvoiceService {
     @Override
     public String delete(Integer id)
     {
-        Optional<Invoice> isInvoice = repository.findById(id);
+        Optional<Invoice> isInvoice = repository.findById(Long.valueOf(id));
         if(isInvoice.isPresent())
         {
-            repository.deleteById(id);
+            repository.deleteById(Long.valueOf(id));
             return "Invoice deleted successfully";
         }
         return "No such invoice in the database";

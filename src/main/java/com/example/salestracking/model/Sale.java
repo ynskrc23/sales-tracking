@@ -1,30 +1,38 @@
 package com.example.salestracking.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.Set;
 
-// code first
-@Entity // not needed but it's useful for reviewing
-@Setter
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
+@Entity
 @Table(name = "sales")
-public class Sale extends BaseEntity {
-    private int quantity;
-    private BigDecimal productSalePrice;
-    private BigDecimal totalAmount;
-    private String saleNumber;
-    private String status;
+@Data
+public class Sale extends BaseEntity
+{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long saleId;
+
     @ManyToOne
-    @JoinColumn(name = "customer_id")
+    @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
+
     @ManyToOne
-    @JoinColumn(name = "product_id")
-    private Product product;
+    @JoinColumn(name = "salesperson_id")
+    private Salesperson salesperson;
+
+    @Column(name = "sale_date", nullable = false)
+    private LocalDate saleDate;
+
+    @Column(name = "total_amount", precision = 10, scale = 2)
+    private BigDecimal totalAmount;
+
+    @OneToMany(mappedBy = "sale")
+    private Set<SaleItem> saleItems;
+
+    @OneToOne(mappedBy = "sale")
+    private Invoice invoice;
 }

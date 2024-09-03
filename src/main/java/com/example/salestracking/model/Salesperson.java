@@ -4,15 +4,14 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Set;
-
 @Entity
-@Table(name = "customers")
+@Table(name = "salespersons")
 @Data
-public class Customer extends BaseEntity
+public class Salesperson extends BaseEntity
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long customerId;
+    private Long salespersonId;
 
     @Column(name = "first_name", nullable = false, length = 50)
     private String firstName;
@@ -26,15 +25,9 @@ public class Customer extends BaseEntity
     @Column(name = "phone", length = 20)
     private String phone;
 
-    @Column(name = "address", length = 255)
-    private String address;
+    @Column(name = "hire_date")
+    private java.time.LocalDate hireDate;
 
-    @Column(name = "city", length = 100)
-    private String city;
-
-    @Column(name = "country", length = 100)
-    private String country;
-
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "salesperson")
     private Set<Sale> sales;
 }

@@ -12,11 +12,8 @@ import java.util.Date;
 @Getter
 @Setter
 @MappedSuperclass
-public class BaseEntity implements Serializable {
-    @Id // Primary Key -> PK
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
+public class BaseEntity implements Serializable
+{
     @CreationTimestamp
     @Column(name="created_at", updatable = false)
     private Date createdAt;

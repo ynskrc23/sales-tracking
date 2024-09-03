@@ -40,7 +40,7 @@ public class ProductManager implements ProductService {
     public CreateProductResponse add(CreateProductRequest request)
     {
         Product product = mapper.map(request, Product.class);
-        product.setId(0);
+        product.setProductId(0L);
         repository.save(product);
         return mapper.map(product, CreateProductResponse.class);
     }
@@ -52,7 +52,7 @@ public class ProductManager implements ProductService {
         if(isProduct.isPresent())
         {
             Product product = mapper.map(request, Product.class);
-            product.setId(Math.toIntExact(id));
+            product.setProductId((long) Math.toIntExact(id));
             repository.save(product);
             return mapper.map(product, UpdateProductResponse.class);
         }

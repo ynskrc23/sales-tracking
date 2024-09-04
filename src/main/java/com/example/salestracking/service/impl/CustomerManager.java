@@ -18,7 +18,8 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class CustomerManager implements CustomerService {
+public class CustomerManager implements CustomerService
+{
     private final CustomerRepository repository;
     private final ModelMapper mapper;
     @Override

@@ -9,7 +9,8 @@ import com.example.salestracking.dto.response.customer.UpdateCustomerResponse;
 
 import java.util.List;
 
-public interface CustomerService {
+public interface CustomerService
+{
     List<GetAllCustomersResponse> getAll();
     GetCustomerResponse getById(Long id);
     CreateCustomerResponse add(CreateCustomerRequest request);

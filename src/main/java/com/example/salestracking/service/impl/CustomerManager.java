@@ -60,7 +60,8 @@ public class CustomerManager implements CustomerService
     }
 
     @Override
-    public String delete(Long id) {
+    public String delete(Long id)
+    {
         Optional<Customer> isCustomer = repository.findById(id);
         if(isCustomer.isPresent())
         {

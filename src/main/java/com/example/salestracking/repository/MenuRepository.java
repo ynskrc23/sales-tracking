@@ -1,9 +1,8 @@
 package com.example.salestracking.repository;
 
-import com.example.salestracking.model.Sale;
+import com.example.salestracking.model.Menu;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface SaleRepository extends JpaRepository<Sale, Long>
+public interface MenuRepository extends JpaRepository<Menu, Long>
 {
-
 }

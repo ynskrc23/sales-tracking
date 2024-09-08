@@ -6,6 +6,7 @@ import com.example.salestracking.dto.response.role.CreateRoleResponse;
 import com.example.salestracking.dto.response.role.GetAllRolesResponse;
 import com.example.salestracking.dto.response.role.GetRoleResponse;
 import com.example.salestracking.dto.response.role.UpdateRoleResponse;
+import com.example.salestracking.model.Customer;
 import com.example.salestracking.model.Role;
 import com.example.salestracking.repository.RoleRepository;
 import com.example.salestracking.service.RoleService;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -38,7 +40,8 @@ public class RoleManager implements RoleService
     }
 
     @Override
-    public CreateRoleResponse add(CreateRoleRequest request) {
+    public CreateRoleResponse add(CreateRoleRequest request)
+    {
         Role role = mapper.map(request, Role.class);
         role.setRoleId(0L);
         role.setRoleName(request.getRoleName());
@@ -65,12 +68,43 @@ public class RoleManager implements RoleService
     @Override
     public UpdateRoleResponse update(Long id, UpdateRoleRequest request)
     {
-        return null;
+        Optional<Role> isRole = repository.findById(id);
+        if(isRole.isPresent())
+        {
+            Role role = mapper.map(request, Role.class);
+            role.setRoleName(request.getRoleName());
+            role.setRoleStatus(request.getRoleStatus());
+
+            // İzinleri güncelle
+            String rolePermission = request.getPermissions().stream()
+                    .map(permission -> String.format(
+                            "{\"menu_id\":%d,\"permission_show\":%b,\"permission_add\":%b,\"permission_update\":%b,\"permission_delete\":%b,\"permission_datatable\":%b}",
+                            permission.getMenuId(),
+                            permission.isPermissionShow(),
+                            permission.isPermissionAdd(),
+                            permission.isPermissionUpdate(),
+                            permission.isPermissionDelete(),
+                            permission.isPermissionDatatable()
+                    ))
+                    .collect(Collectors.joining("*"));
+
+            role.setRolePermission(rolePermission);
+            role.setRoleId((long) Math.toIntExact(id));
+            repository.save(role);
+            return mapper.map(role, UpdateRoleResponse.class);
+        }
+       return null;
     }
 
     @Override
     public String delete(Long id)
     {
-        return null;
+        Optional<Role> isRole = repository.findById(id);
+        if(isRole.isPresent())
+        {
+            repository.deleteById(id);
+            return "Role deleted successfully";
+        }
+        return "No such role in the database";
     }
 }

@@ -95,6 +95,17 @@ public class MenuManager implements MenuService
     @Override
     public String delete(Long id)
     {
-        return null;
+        // Ana menüyü bul
+        Menu menu = repository.findById(id).orElseThrow();
+
+        // menuParentId'si ana menüye eşit olan tüm alt menüleri bul ve sil
+        List<Menu> subMenus = repository.findByMenuParentId(menu.getMenuId());
+        if (!subMenus.isEmpty()) {
+            repository.deleteAll(subMenus);
+        }
+
+        // Ana menüyü sil
+        repository.delete(menu);
+        return "Menu deleted successfully";
     }
 }

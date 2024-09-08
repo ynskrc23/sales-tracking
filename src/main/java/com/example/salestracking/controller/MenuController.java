@@ -34,4 +34,11 @@ public class MenuController
     {
         return service.add(request,create,update,list);
     }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public String delete(@PathVariable Long id)
+    {
+        return service.delete(id);
+    }
 }

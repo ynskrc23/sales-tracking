@@ -11,9 +11,10 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Getter
 @Setter
-public class GetProductResponse {
-    private Long id;
-    private String name;
+public class GetProductResponse
+{
+    private Long productId;
+    private String productName;
     private String description;
     private BigDecimal price;
     private int stockQuantity;

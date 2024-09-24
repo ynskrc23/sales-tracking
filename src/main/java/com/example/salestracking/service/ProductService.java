@@ -9,7 +9,8 @@ import com.example.salestracking.dto.response.product.UpdateProductResponse;
 
 import java.util.List;
 
-public interface ProductService {
+public interface ProductService
+{
     List<GetAllProductsResponse> getAll();
     GetProductResponse getById(Long id);
     CreateProductResponse add(CreateProductRequest request);

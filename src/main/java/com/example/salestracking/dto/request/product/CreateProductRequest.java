@@ -12,10 +12,11 @@ import java.math.BigDecimal;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateProductRequest {
+public class CreateProductRequest
+{
     @NotBlank(message = "Name is mandatory")
-    @Size(min = 5, max = 100, message = "Name must be between 2 and 100 characters")
-    private String name;
+    @Size(min = 2, max = 100, message = "Name must be between 2 and 100 characters")
+    private String productName;
 
     private String description;
 

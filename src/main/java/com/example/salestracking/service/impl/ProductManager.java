@@ -18,8 +18,8 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class ProductManager implements ProductService {
-
+public class ProductManager implements ProductService
+{
     private final ProductRepository repository;
     private final ModelMapper mapper;
     @Override

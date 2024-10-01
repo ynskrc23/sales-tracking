@@ -2,7 +2,6 @@ package com.example.salestracking.service.impl;
 
 import com.example.salestracking.dto.request.menu.CreateMenuRequest;
 import com.example.salestracking.model.Menu;
-import com.example.salestracking.model.Role;
 import com.example.salestracking.repository.MenuRepository;
 import com.example.salestracking.service.MenuService;
 import lombok.AllArgsConstructor;

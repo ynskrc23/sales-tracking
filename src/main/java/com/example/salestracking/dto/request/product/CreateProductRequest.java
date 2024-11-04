@@ -27,4 +27,7 @@ public class CreateProductRequest
     @Min(1)
     @NotNull(message = "Stock is mandatory")
     private int stockQuantity;
+
+    @NotNull(message = "Category is mandatory")
+    private int categoryId;
 }

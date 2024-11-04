@@ -1,5 +1,6 @@
 package com.example.salestracking.dto.response.product;
 
+import com.example.salestracking.dto.response.category.GetAllCategoriesResponse;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,4 +19,5 @@ public class GetProductResponse
     private String description;
     private BigDecimal price;
     private int stockQuantity;
+    private GetAllCategoriesResponse category;
 }

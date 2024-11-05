@@ -6,7 +6,6 @@ import com.example.salestracking.dto.response.sale.CreateSaleResponse;
 import com.example.salestracking.dto.response.sale.GetAllSalesResponse;
 import com.example.salestracking.dto.response.sale.GetSaleResponse;
 import com.example.salestracking.dto.response.sale.UpdateSaleResponse;
-import com.example.salestracking.model.Sale;
 import com.example.salestracking.service.SaleService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -14,12 +13,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/sales")
-public class SaleController {
+public class SaleController
+{
     private final SaleService service;
 
     @GetMapping

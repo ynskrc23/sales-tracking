@@ -6,12 +6,11 @@ import com.example.salestracking.dto.response.sale.CreateSaleResponse;
 import com.example.salestracking.dto.response.sale.GetAllSalesResponse;
 import com.example.salestracking.dto.response.sale.GetSaleResponse;
 import com.example.salestracking.dto.response.sale.UpdateSaleResponse;
-import com.example.salestracking.model.Sale;
 
 import java.util.List;
-import java.util.Map;
 
-public interface SaleService {
+public interface SaleService
+{
     List<GetAllSalesResponse> getAll();
     GetSaleResponse getById(Integer id);
     CreateSaleResponse add(CreateSaleRequest request);

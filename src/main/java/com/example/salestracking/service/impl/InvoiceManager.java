@@ -20,8 +20,8 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class InvoiceManager implements InvoiceService {
-
+public class InvoiceManager implements InvoiceService
+{
     private final InvoiceRepository repository;
     private final SaleRepository saleRepository;
     private final ModelMapper mapper;

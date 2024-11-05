@@ -9,7 +9,8 @@ import com.example.salestracking.dto.response.invoice.UpdateInvoiceResponse;
 
 import java.util.List;
 
-public interface InvoiceService {
+public interface InvoiceService
+{
     List<GetAllInvoicesResponse> getAll();
     GetInvoiceResponse getById(Integer id);
     CreateInvoiceResponse add(CreateInvoiceRequest request);

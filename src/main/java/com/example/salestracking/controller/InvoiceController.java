@@ -17,8 +17,8 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/invoices")
-public class InvoiceController {
-
+public class InvoiceController
+{
     private final InvoiceService service;
     @GetMapping
     public List<GetAllInvoicesResponse> getAll()

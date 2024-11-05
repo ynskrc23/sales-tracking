@@ -17,8 +17,8 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class SaleManager implements SaleService {
-
+public class SaleManager implements SaleService
+{
     private final SaleRepository repository;
 
     private final ModelMapper mapper;

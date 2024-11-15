@@ -1,17 +1,11 @@
 package com.example.salestracking.dto.response.product;
 
 import com.example.salestracking.dto.response.category.GetAllCategoriesResponse;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
+@Data
 public class UpdateProductResponse
 {
     private Long productId;

@@ -1,6 +1,5 @@
 package com.example.salestracking.dto.request.role;
 
-import com.example.salestracking.model.Permission;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 

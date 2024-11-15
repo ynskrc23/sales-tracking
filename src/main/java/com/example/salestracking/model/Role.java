@@ -3,6 +3,8 @@ package com.example.salestracking.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "roles")
 @Data
@@ -20,4 +22,7 @@ public class Role extends BaseEntity
 
     @Column(name = "role_status")
     private Boolean roleStatus;
+
+    @OneToMany(mappedBy = "role")
+    private Set<User> users;
 }

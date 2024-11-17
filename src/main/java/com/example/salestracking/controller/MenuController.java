@@ -5,40 +5,61 @@ import com.example.salestracking.model.Menu;
 import com.example.salestracking.service.MenuService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/menus")
-public class MenuController
+public class MenuController extends BaseController
 {
     private final MenuService service;
 
     @GetMapping
-    public List<Menu> getAll()
+    public ResponseEntity<?> getAll()
     {
-        return service.getAll();
+        try {
+            List<Menu> menus = service.getAll();
+            return jsonResponse(menus, HttpStatus.OK);
+        } catch (Exception ex) {
+            return jsonError(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, Map.of());
+        }
     }
 
     @GetMapping("/{id}")
-    public Menu getById(@PathVariable Long id)
+    public ResponseEntity<?> getById(@PathVariable Long id)
     {
-        return service.getById(id);
+        try {
+            Menu menu = service.getById(id);
+            return jsonResponse(menu, HttpStatus.OK);
+        } catch (Exception ex) {
+            return jsonError(ex.getMessage(), HttpStatus.NOT_FOUND, Map.of("id", "Menu not found for ID: " + id));
+        }
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Menu add(@RequestBody CreateMenuRequest request, boolean create, boolean update, boolean list)
+    public ResponseEntity<?> add(@RequestBody CreateMenuRequest request, boolean create, boolean update, boolean list)
     {
-        return service.add(request,create,update,list);
+        try {
+            Menu menu = service.add(request, create, update, list);
+            return jsonResponse(menu, HttpStatus.CREATED);
+        } catch (Exception ex) {
+            return jsonError(ex.getMessage(), HttpStatus.BAD_REQUEST, Map.of());
+        }
     }
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public String delete(@PathVariable Long id)
+    public ResponseEntity<?> delete(@PathVariable Long id)
     {
-        return service.delete(id);
+        try {
+            service.delete(id);
+            return jsonResponse("Menu deleted successfully.", HttpStatus.NO_CONTENT);
+        } catch (Exception ex) {
+            return jsonError(ex.getMessage(), HttpStatus.NOT_FOUND, Map.of("id", "Unable to delete menu for ID: " + id));
+        }
     }
 }

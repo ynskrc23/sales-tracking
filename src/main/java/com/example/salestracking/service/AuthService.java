@@ -1,8 +1,8 @@
 package com.example.salestracking.service;
 
-import org.springframework.http.ResponseEntity;
+import com.example.salestracking.dto.response.auth.LoginResponse;
 
 public interface AuthService
 {
-    ResponseEntity<?> login(String email, String password);
+    LoginResponse login(String email, String password);
 }

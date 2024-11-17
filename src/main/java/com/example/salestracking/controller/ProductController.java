@@ -10,46 +10,73 @@ import com.example.salestracking.service.ProductService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/products")
-public class ProductController
+public class ProductController extends BaseController
 {
     private final ProductService service;
 
     @GetMapping
-    public List<GetAllProductsResponse> getAll()
+    public ResponseEntity<?> getAll()
     {
-        return service.getAll();
+        try {
+            List<GetAllProductsResponse> products = service.getAll();
+            return jsonResponse(products, HttpStatus.OK);
+        } catch (Exception ex) {
+            return jsonError(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, Map.of());
+        }
     }
 
     @GetMapping("/{id}")
-    public GetProductResponse getById(@PathVariable Long id)
+    public ResponseEntity<?> getById(@PathVariable Long id)
     {
-        return service.getById(id);
+        try {
+            GetProductResponse product = service.getById(id);
+            return jsonResponse(product, HttpStatus.OK);
+        } catch (Exception ex) {
+            return jsonError(ex.getMessage(), HttpStatus.NOT_FOUND, Map.of("id", "Product not found for ID: " + id));
+        }
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CreateProductResponse add(@Valid @RequestBody CreateProductRequest request)
+    public ResponseEntity<?> add(@Valid @RequestBody CreateProductRequest request)
     {
-        return service.add(request);
+        try {
+            CreateProductResponse product = service.add(request);
+            return jsonResponse(product, HttpStatus.CREATED);
+        } catch (Exception ex) {
+            return jsonError(ex.getMessage(), HttpStatus.BAD_REQUEST, Map.of());
+        }
     }
 
     @PutMapping("/{id}")
-    public UpdateProductResponse update(@PathVariable Long id, @Valid @RequestBody UpdateProductRequest request)
+    public ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody UpdateProductRequest request)
     {
-        return service.update(id, request);
+        try {
+            UpdateProductResponse product = service.update(id, request);
+            return jsonResponse(product, HttpStatus.OK);
+        } catch (Exception ex) {
+            return jsonError(ex.getMessage(), HttpStatus.NOT_FOUND, Map.of("id", "Product not found for ID: " + id));
+        }
     }
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public String delete(@PathVariable Long id)
+    public ResponseEntity<?> delete(@PathVariable Long id)
     {
-        return service.delete(id);
+        try {
+            service.delete(id);
+            return jsonResponse("Product deleted successfully.", HttpStatus.NO_CONTENT);
+        } catch (Exception ex) {
+            return jsonError(ex.getMessage(), HttpStatus.NOT_FOUND, Map.of("id", "Unable to delete product for ID: " + id));
+        }
     }
 }
+

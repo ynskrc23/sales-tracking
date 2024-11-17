@@ -33,7 +33,7 @@ public class CategoryManager implements CategoryService
     @Override
     public GetCategoryResponse getById(Long id)
     {
-        Category category = repository.findById(id).orElseThrow(null);
+        Category category = repository.findById(id).orElseThrow(() -> new RuntimeException("Category not found with id: " + id));
         return mapper.map(category, GetCategoryResponse.class);
     }
 

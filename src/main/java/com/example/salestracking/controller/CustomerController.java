@@ -10,46 +10,73 @@ import com.example.salestracking.service.CustomerService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+
 
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/customers")
-public class CustomerController
+public class CustomerController extends BaseController
 {
     private final CustomerService service;
 
     @GetMapping
-    public List<GetAllCustomersResponse> getAll()
+    public ResponseEntity<?> getAll()
     {
-        return service.getAll();
+        try {
+            List<GetAllCustomersResponse> customers = service.getAll();
+            return jsonResponse(customers, HttpStatus.OK);
+        } catch (Exception ex) {
+            return jsonError(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, Map.of());
+        }
     }
 
     @GetMapping("/{id}")
-    public GetCustomerResponse getById(@PathVariable Long id)
+    public ResponseEntity<?> getById(@PathVariable Long id)
     {
-        return service.getById(id);
+        try {
+            GetCustomerResponse customer = service.getById(id);
+            return jsonResponse(customer, HttpStatus.OK);
+        } catch (Exception ex) {
+            return jsonError(ex.getMessage(), HttpStatus.NOT_FOUND, Map.of("id", "Customer not found for ID: " + id));
+        }
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CreateCustomerResponse add(@Valid @RequestBody CreateCustomerRequest request)
+    public ResponseEntity<?> add(@Valid @RequestBody CreateCustomerRequest request)
     {
-        return service.add(request);
+        try {
+            CreateCustomerResponse customer = service.add(request);
+            return jsonResponse(customer, HttpStatus.CREATED);
+        } catch (Exception ex) {
+            return jsonError(ex.getMessage(), HttpStatus.BAD_REQUEST, Map.of());
+        }
     }
 
     @PutMapping("/{id}")
-    public UpdateCustomerResponse update(@PathVariable Long id, @Valid @RequestBody UpdateCustomerRequest request)
+    public ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody UpdateCustomerRequest request)
     {
-        return service.update(id, request);
+        try {
+            UpdateCustomerResponse customer = service.update(id, request);
+            return jsonResponse(customer, HttpStatus.OK);
+        } catch (Exception ex) {
+            return jsonError(ex.getMessage(), HttpStatus.NOT_FOUND, Map.of("id", "Unable to update customer for ID: " + id));
+        }
     }
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public String delete(@PathVariable Long id)
+    public ResponseEntity<?> delete(@PathVariable Long id)
     {
-        return service.delete(id);
+        try {
+            service.delete(id);
+            return jsonResponse("Customer deleted successfully.", HttpStatus.NO_CONTENT);
+        } catch (Exception ex) {
+            return jsonError(ex.getMessage(), HttpStatus.NOT_FOUND, Map.of("id", "Unable to delete customer for ID: " + id));
+        }
     }
 }

@@ -10,46 +10,72 @@ import com.example.salestracking.service.CategoryService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/categories")
-public class CategoryController 
+public class CategoryController extends BaseController
 {
     private final CategoryService service;
 
     @GetMapping
-    public List<GetAllCategoriesResponse> getAll()
+    public ResponseEntity<?> getAll()
     {
-        return service.getAll();
+        try {
+            List<GetAllCategoriesResponse> categories = service.getAll();
+            return jsonResponse(categories, HttpStatus.OK);
+        } catch (Exception ex) {
+            return jsonError(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, Map.of());
+        }
     }
 
     @GetMapping("/{id}")
-    public GetCategoryResponse getById(@PathVariable Long id)
+    public ResponseEntity<?> getById(@PathVariable Long id)
     {
-        return service.getById(id);
+        try {
+            GetCategoryResponse category = service.getById(id);
+            return jsonResponse(category, HttpStatus.OK);
+        } catch (Exception ex) {
+            return jsonError(ex.getMessage(), HttpStatus.NOT_FOUND, Map.of("id", "Category not found for ID: " + id));
+        }
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CreateCategoryResponse add(@Valid @RequestBody CreateCategoryRequest request)
+    public ResponseEntity<?> add(@Valid @RequestBody CreateCategoryRequest request)
     {
-        return service.add(request);
+        try {
+            CreateCategoryResponse category = service.add(request);
+            return jsonResponse(category, HttpStatus.CREATED);
+        } catch (Exception ex) {
+            return jsonError(ex.getMessage(), HttpStatus.BAD_REQUEST, Map.of());
+        }
     }
 
     @PutMapping("/{id}")
-    public UpdateCategoryResponse update(@PathVariable Long id, @Valid @RequestBody UpdateCategoryRequest request)
+    public ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody UpdateCategoryRequest request)
     {
-        return service.update(id, request);
+        try {
+            UpdateCategoryResponse category = service.update(id, request);
+            return jsonResponse(category, HttpStatus.OK);
+        } catch (Exception ex) {
+            return jsonError(ex.getMessage(), HttpStatus.NOT_FOUND, Map.of("id", "Unable to update category for ID: " + id));
+        }
     }
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public String delete(@PathVariable Long id)
+    public ResponseEntity<?> delete(@PathVariable Long id)
     {
-        return service.delete(id);
+        try {
+            service.delete(id);
+            return jsonResponse("Kategori silme başarılı.", HttpStatus.NO_CONTENT);
+        } catch (Exception ex) {
+            return jsonError(ex.getMessage(), HttpStatus.NOT_FOUND, Map.of("id", "Unable to delete category for ID: " + id));
+        }
     }
 }

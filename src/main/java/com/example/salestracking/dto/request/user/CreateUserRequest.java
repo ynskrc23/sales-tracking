@@ -23,6 +23,6 @@ public class CreateUserRequest
 
     private Boolean userStatus;
 
-    @NotNull(message = "Category is mandatory")
-    private int userRoleId;
+    @NotNull(message = "Role is mandatory")
+    private int roleId;
 }

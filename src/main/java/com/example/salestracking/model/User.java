@@ -28,6 +28,6 @@ public class User extends BaseEntity
     private Boolean userStatus;
 
     @ManyToOne
-    @JoinColumn(name = "user_role_id")
+    @JoinColumn(name = "role_id")
     private Role role;
 }

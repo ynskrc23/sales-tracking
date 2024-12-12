@@ -27,7 +27,4 @@ public class Salesperson extends BaseEntity
 
     @Column(name = "hire_date")
     private java.time.LocalDate hireDate;
-
-    @OneToMany(mappedBy = "salesperson")
-    private Set<Sale> sales;
 }

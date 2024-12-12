@@ -9,7 +9,7 @@ public class CreateUserRequest
     @NotBlank(message = "Full Name is mandatory")
     private String fullName;
 
-    @NotBlank(message = "Last Name is mandatory")
+    @NotBlank(message = "Email is mandatory")
     @Email
     private String email;
 

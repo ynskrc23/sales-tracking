@@ -34,7 +34,4 @@ public class Customer extends BaseEntity
 
     @Column(name = "country", length = 100)
     private String country;
-
-    @OneToMany(mappedBy = "customer")
-    private Set<Sale> sales;
 }

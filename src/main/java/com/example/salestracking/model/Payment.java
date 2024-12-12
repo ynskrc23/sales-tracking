@@ -14,10 +14,6 @@ public class Payment extends BaseEntity
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long paymentId;
 
-    @ManyToOne
-    @JoinColumn(name = "invoice_id", nullable = false)
-    private Invoice invoice;
-
     @Column(name = "payment_date", nullable = false)
     private LocalDate paymentDate;
 

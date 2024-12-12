@@ -34,7 +34,7 @@ public class UserManager implements UserService
     @Override
     public GetUserResponse getById(Long id)
     {
-        User user = repository.findById(id).orElseThrow();
+        User user = repository.findById(id).orElseThrow(null);
         return mapper.map(user, GetUserResponse.class);
     }
 
